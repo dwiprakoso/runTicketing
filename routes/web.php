@@ -1,7 +1,13 @@
 <?php
 
-use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\OrderController;
+
+Route::get('storage-link', function () {
+    Artisan::call('storage:link');
+    return 'storage link created';
+});
 
 Route::get('/', [OrderController::class, 'showEvent'])->name('event.detail');
 Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
