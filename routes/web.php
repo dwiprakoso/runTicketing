@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\OrderController;
 
-Route::get('storage-link', function () {
+Route::get('/storage-link', function () {
     Artisan::call('storage:link');
     return 'storage link created';
 });
