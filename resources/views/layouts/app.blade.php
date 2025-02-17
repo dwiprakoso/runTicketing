@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <title>Event Ticketing</title>
     <style>
         * {
@@ -31,8 +30,9 @@
         .container {
             display: flex;
             flex: 1;
-            padding: 20px;
+            flex-wrap: wrap;
             gap: 20px;
+            padding: 20px;
         }
         .left-section {
             background-color: #3498db;
@@ -40,12 +40,11 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-            /* display: flex; */
             justify-content: center;
             align-items: center;
             flex-direction: column;
             aspect-ratio: 16 / 9;
-            width: 30%;
+            width: 100%;
             max-width: 400px;
         }
         .left-section img {
@@ -62,6 +61,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            width: 100%;
         }
         .top-content, .bottom-content {
             background-color: #ffffff;
@@ -93,6 +93,18 @@
         .buttons div:hover {
             background: linear-gradient(135deg, #1e6091, #56c1e6);
         }
+        /* Make the layout responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .left-section {
+                width: 100%;
+            }
+            .right-section {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -105,7 +117,6 @@
             <div class="event-description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit architecto iusto eos, placeat, in voluptatem officiis repudiandae mollitia alias pariatur unde quos libero ut modi eligendi quaerat. Aspernatur, pariatur reiciendis aliquid iusto sint dicta facere placeat, atque porro a vitae! Voluptate quos porro consequatur provident quaerat dolore, blanditiis, sed qui ex quam atque minus non nostrum repellendus voluptatibus cum aspernatur aperiam aliquam hic odit mollitia! Aperiam odio nam nemo? Obcaecati deserunt numquam sapiente quod commodi maiores, magnam architecto quos neque totam corporis, veniam dicta minus quisquam quasi nesciunt cum recusandae ipsam vitae esse unde! Aliquam ratione magnam quo sit ut?</div>
         </div>
         <div class="right-section">
-            
             <div class="bottom-content">@yield('content')</div>
         </div>
     </div>

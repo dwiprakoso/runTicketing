@@ -34,9 +34,9 @@
     </div>
 
     <div class="formbold-input-flex">
-        <div>
+        <div class="mb-3">
             <label for="ticket_category_id" class="formbold-form-label">Kategori Tiket</label>
-            <select class="formbold-form-input" id="ticket_category_id" name="ticket_category_id" required>
+            <select class="formbold-form-input form-select" id="ticket_category_id" name="ticket_category_id" required>
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}" data-price="{{ $category->price }}">
                         {{ $category->name }} | Rp{{ number_format($category->price, 2) }}
