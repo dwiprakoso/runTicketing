@@ -100,6 +100,12 @@
     <header>
         Event Ticketing
     </header>
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="container">
         <div class="right-section">
             <div class="bottom-content"><h2>Daftar Pesanan</h2>
@@ -132,7 +138,7 @@
                                     <td>{{ $order->ticketCategory->name }}</td>
                                     <td>{{ $order->quantity }}</td>
                                     <td>Rp{{ number_format($order->total_price, 2) }}</td>
-                                    <td>{{ ucfirst($order->status) }}</td>
+                                    <td>{{ ($order->status) }}</td>
                                     <td>
                                         <!-- Tombol untuk melihat bukti pembayaran -->
                                         <a href="{{ route('admin.showOrder', $order->id) }}" class="btn btn-primary">Lihat Bukti Pembayaran</a>

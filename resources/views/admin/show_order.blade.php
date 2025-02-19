@@ -38,4 +38,12 @@
             </td>
         </tr>
     </table>
+
+    @if ($order->status === 'pending')
+        <form action="{{ route('admin.verifyOrder', $order->id) }}" method="POST">
+            @csrf
+            @method('PATCH')
+            <button type="submit" class="btn btn-success">Verifikasi Pembayaran</button>
+        </form>
+    @endif
 @endsection

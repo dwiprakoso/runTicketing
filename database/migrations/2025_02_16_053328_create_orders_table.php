@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->decimal('total_price', 10, 2);
             $table->string('payment_proof')->nullable();
-            $table->enum('status', ['pending', 'confirmed', 'rejected'])->default('pending');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

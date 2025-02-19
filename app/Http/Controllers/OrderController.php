@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\TicketCategory;
+use App\Mail\TicketConfirmation;
+use Illuminate\Support\Facades\Mail;
+
+
 
 class OrderController extends Controller
 {
@@ -28,6 +32,7 @@ class OrderController extends Controller
     
         public function placeOrder(Request $request)
         {
+            // Validasi inputan
             $request->validate([
                 'ticket_category_id' => 'required|exists:ticket_categories,id',
                 'buyer_name' => 'required|string|max:255',
@@ -50,8 +55,14 @@ class OrderController extends Controller
                 'total_price' => $total_price, // Pastikan nilai ini benar
             ]);
 
+            // Kirim email konfirmasi kepada pembeli
+            $paymentLink = route('uploadPayment', ['buyer_name' => $order->buyer_name]);
+            Mail::to($order->buyer_email)->send(new TicketConfirmation($order, $paymentLink));
+
+            // Redirect ke halaman upload pembayaran
             return redirect()->route('uploadPayment', ['buyer_name' => $order->buyer_name]);
         }
+
 
     
         public function uploadPayment($buyer_name)
@@ -73,6 +84,7 @@ class OrderController extends Controller
 
                 // Simpan file ke storage/app/public/payments
                 $path = $file->storeAs('payments', $fileName, 'public');
+                // dd($path);
 
                 // Debug untuk memastikan path tersimpan dengan benar
                 // dd($path);
@@ -82,6 +94,8 @@ class OrderController extends Controller
                     'payment_proof' => $path,
                     'status' => 'pending'
                 ]);
+                
+                // dd($order->fresh()); // Lihat apakah payment_proof benar-benar tersimpan di database
                 
                 // dd($order); // Debug untuk melihat apakah data sudah berubah
 
@@ -103,7 +117,16 @@ class OrderController extends Controller
 
             return view('admin.show_order', compact('order'));
         }
+        public function verifyOrder($id)
+        {
+            // Ambil order berdasarkan ID
+            $order = Order::findOrFail($id);
 
+            // Ubah status order menjadi 'success'
+            $order->status = 'success';
+            $order->save();
 
-
+            // Redirect ke halaman daftar pesanan dengan pesan sukses
+            return redirect()->route('admin.orders')->with('success', 'Pesanan berhasil diverifikasi.');
+        }
     }
