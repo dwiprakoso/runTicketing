@@ -15,10 +15,9 @@ class Order extends Model
         'phone_number', 
         'quantity', 
         'total_price',
-        'payment_proof', // Pastikan ini ada
+        'payment_proof', // PASTIKAN INI ADA
         'status'
     ];
-    
 
     public function ticketCategory()
     {

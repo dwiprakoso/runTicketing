@@ -13,6 +13,8 @@ Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('place
 Route::get('/admin/orders', [OrderController::class, 'showOrders'])->name('admin.orders');
 // Route untuk melihat bukti pembayaran
 Route::get('/admin/orders/{id}', [OrderController::class, 'showOrder'])->name('admin.showOrder');
+Route::post('/admin/orders/{id}/verify', [OrderController::class, 'verifyOrder'])->name('admin.verifyOrder');
+
 Route::patch('/admin/orders/{id}/verify', [OrderController::class, 'verifyOrder'])->name('admin.verifyOrder');
 Route::get('/upload-payment/{buyer_name}', [OrderController::class, 'uploadPayment'])->name('uploadPayment');
 Route::post('/store-payment/{buyer_name}', [OrderController::class, 'storePayment'])->name('storePayment');

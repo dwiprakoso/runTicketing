@@ -40,10 +40,9 @@
     </table>
 
     @if ($order->status === 'pending')
-        <form action="{{ route('admin.verifyOrder', $order->id) }}" method="POST">
+        <form action="{{ route('admin.verifyOrder', $order->id) }}" method="POST" style="display:inline;">
             @csrf
-            @method('PATCH')
-            <button type="submit" class="btn btn-success">Verifikasi Pembayaran</button>
+            <button type="submit" class="btn btn-primary">Verifikasi</button>
         </form>
     @endif
 @endsection

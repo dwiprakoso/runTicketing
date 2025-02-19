@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\TicketCategory;
 use App\Mail\TicketConfirmation;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderVerified;
 
 
 
@@ -95,7 +96,7 @@ class OrderController extends Controller
                     'status' => 'pending'
                 ]);
                 
-                // dd($order->fresh()); // Lihat apakah payment_proof benar-benar tersimpan di database
+                dd($order->fresh()); // Lihat apakah payment_proof benar-benar tersimpan di database
                 
                 // dd($order); // Debug untuk melihat apakah data sudah berubah
 
@@ -126,7 +127,10 @@ class OrderController extends Controller
             $order->status = 'success';
             $order->save();
 
+            // Kirim email notifikasi ke pembeli
+            Mail::to($order->buyer_email)->send(new OrderVerified($order));
+
             // Redirect ke halaman daftar pesanan dengan pesan sukses
-            return redirect()->route('admin.orders')->with('success', 'Pesanan berhasil diverifikasi.');
+            return redirect()->route('admin.orders')->with('success', 'Pesanan berhasil diverifikasi dan email notifikasi telah dikirim.');
         }
     }
