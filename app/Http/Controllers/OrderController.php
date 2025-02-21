@@ -13,6 +13,10 @@ use App\Mail\OrderVerified;
 
 class OrderController extends Controller
 {
+    public function showLanding()
+    {
+        return view('event.landing');
+    }
     public function showEvent()
     {
         $event = [
@@ -96,7 +100,7 @@ class OrderController extends Controller
                     'status' => 'pending'
                 ]);
                 
-                dd($order->fresh()); // Lihat apakah payment_proof benar-benar tersimpan di database
+                // dd($order->fresh()); // Lihat apakah payment_proof benar-benar tersimpan di database
                 
                 // dd($order); // Debug untuk melihat apakah data sudah berubah
 

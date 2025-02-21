@@ -33,7 +33,9 @@
                     <td>Rp{{ number_format($order->total_price, 2) }}</td>
                 </tr>
             </table>
-            <p class="mt-3">Silakan unggah bukti pembayaran Anda.</p>
+            <p class="mt-3">Silahkan dapat melakukan pembayaran sesuai dengan total harga yang tertera di atas.</p>
+            <p class="mt-3">a.n : Panitia Event</p>
+            <p class="mt-3">No Rekening : 123456789</p>
             <form action="{{ route('storePayment', ['buyer_name' => $order->buyer_name]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">

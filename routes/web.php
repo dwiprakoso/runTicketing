@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 
 
+
+Route::get('/landing', [OrderController::class, 'showLanding'])->name('event.landing');
 Route::get('/', [OrderController::class, 'showEvent'])->name('event.detail');
 Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
 Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('placeOrder');
